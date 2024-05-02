@@ -1,4 +1,4 @@
-# Tic Tac Toe Game
+# Jogo da Velha
 
 Este é um jogo da velha simples desenvolvido em React com Next.js e TypeScript. O jogo possui duas opções de jogo: "Player vs IA" e "Player vs Player". O jogador pode escolher o modo de jogo no menu principal e jogar contra o computador ou contra outro jogador.
 
