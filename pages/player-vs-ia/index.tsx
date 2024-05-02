@@ -1,6 +1,6 @@
 // pages/player-vs-ia.tsx
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Board from '../../components/Board';
 
 const PlayerVsIA: React.FC = () => {

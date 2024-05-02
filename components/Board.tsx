@@ -12,6 +12,7 @@ const Board: React.FC<Props> = ({ mode }) => {
   const router = useRouter();
   const [board, setBoard] = useState(Array(9).fill(''));
   const [xIsNext, setXIsNext] = useState(true);
+  const [playerStarts, setPlayerStarts] = useState(true); // Adicionamos o estado para controlar quem começa
   const winner = calculateWinner(board);
 
   const handleClick = (i: number) => {
@@ -24,7 +25,7 @@ const Board: React.FC<Props> = ({ mode }) => {
 
   const handleRestart = () => {
     setBoard(Array(9).fill(''));
-    setXIsNext(true);
+    setPlayerStarts(Math.random() < 0.5); // Atualizamos o estado para decidir quem começa aleatoriamente
   };
 
   const handleReturnToMenu = () => {
@@ -33,7 +34,6 @@ const Board: React.FC<Props> = ({ mode }) => {
 
   useEffect(() => {
     if (mode === 'Player vs IA' && !xIsNext && !winner) {
-      // IA's move
       const bestMove = findBestMove(board);
       const newBoard = [...board];
       newBoard[bestMove] = 'O';
@@ -41,6 +41,11 @@ const Board: React.FC<Props> = ({ mode }) => {
       setXIsNext(true);
     }
   }, [board, mode, winner, xIsNext]);
+
+  useEffect(() => {
+    // Atualizamos quem começa toda vez que o estado é alterado
+    setXIsNext(playerStarts);
+  }, [playerStarts]);
 
   const isBoardFull = board.every(cell => cell !== '');
 
